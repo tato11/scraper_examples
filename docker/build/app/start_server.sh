@@ -6,10 +6,10 @@ cd "$SCRIPT_DIR"
 # Load scripts
 source /opt/deploy/bin/template_tools.sh
 
-# Apply database configuration template
-echo ""
-echo "Apply templates"
-echo ""
+# # Apply database configuration template
+# echo ""
+# echo "Apply templates"
+# echo ""
 # TEMPLATE_VARIABLE_LIST='${DB_DATABASE_NAME} ${DB_WRITE_USER} ${DB_WRITE_PASS} ${SECRET_KEY_BASE}'
 # apply_templates /var/www/html/config/database.yml.template /var/www/html/config || exit 1
 
@@ -97,18 +97,5 @@ fi
 
 cd /var/www/html
 
-# echo "Execute database migration"
-# rails db:migrate || $(if [ "$ENV" == 'dev' ]; then echo "exit 1"; else echo 'echo "DEV mode detected, ignoring migration failure..."'; fi)
-
-# # Execute test when
-# if [ "$EXEC_TEST" == '1' ]; then
-#   echo "Executing tests"
-#   rails test || exit 1
-# fi
-# if [ "$ENV" == "prod" ]; then
-#   echo "Precompiling assets"
-#   rake assets:precompile || exit 1
-# fi
-# rails s || exit 1
 echo "Server is ready"
 ping 127.0.0.1 > /dev/null

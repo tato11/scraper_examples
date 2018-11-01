@@ -14,48 +14,6 @@ services:
       placement:
         constraints: [node.labels.web == true]
 
-#   db:
-#     volumes:
-#       - db_data_volume:/var/lib/mysql
-#       - db_seed_volume:/opt/deploy/seeds
-#     deploy:
-#       replicas: 1
-#       update_config:
-#         parallelism: 1
-#       restart_policy:
-#         condition: on-failure
-#       placement:
-#         constraints: [node.labels.data == true]
-#
-#   proxy:
-#     environment:
-#       ENV: "prod"
-#     ports:
-#       - 80:80
-#       - 443:443
-#     deploy:
-#       replicas: 2
-#       update_config:
-#         parallelism: 1
-#       restart_policy:
-#         condition: any
-#       placement:
-#         constraints: [node.labels.web == true]
-#
-# volumes:
-#   db_data_volume:
-#     external:
-#       name: "${DATABASE_VOLUME_NAME}"
-#   db_seed_volume:
-#     external:
-#       name: "${DATABASE_VOLUME_NAME}"
-
 networks:
   dmz_network:
     driver: overlay
-  # proxy_network:
-  #   driver: overlay
-  #   internal: true
-  # data_network:
-  #   driver: overlay
-  #   internal: true

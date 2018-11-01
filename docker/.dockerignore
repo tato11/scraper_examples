@@ -2,6 +2,3 @@
 log/*
 tmp/*
 docker
-db_user.txt
-db_pass.txt
-app_secret_key.txt
