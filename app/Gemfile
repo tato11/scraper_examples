@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'mechanize'
+gem 'typhoeus'
+gem 'selenium-webdriver'
+gem 'xvfb'
+
+group :development, :test do
+  gem 'rspec'
+  gem 'shoulda', '~> 3.5.0'
+  gem 'byebug'
+end
