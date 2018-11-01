@@ -1,0 +1,50 @@
+version: "3.6"
+
+services:
+  app:
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../app:/var/www/html
+    ports:
+      - 3000:3000
+
+  # db:
+  #   volumes:
+  #     - ./modules/db/data:/var/lib/mysql
+  #     - ./modules/db/templates:/opt/deploy/templates
+  #     - ./modules/db/seeds:/opt/deploy/seeds
+  #   ports:
+  #     - 3306:3306
+  #
+  # proxy:
+  #   volumes:
+  #     - ./modules/proxy/config:/etc/nginx/conf.d
+  #     - ./modules/proxy/templates:/opt/deploy/templates
+  #     - ./modules/proxy/settings:/etc/nginx/settings
+  #     - ../app:/var/www/html
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+
+# secrets:
+#   db_database_name:
+#     file: "./secrets/db_database_name.txt"
+#   db_root_pass:
+#     file: "./secrets/db_root_pass.txt"
+#   db_write_user:
+#     file: "./secrets/db_write_user.txt"
+#   db_write_pass:
+#     file: "./secrets/db_write_pass.txt"
+#   #db_read_user:
+#   #  file: "./secrets/db_read_user.txt"
+#   #db_read_pass:
+#   #  file: "./secrets/db_read_pass.txt"
+#   app_secret_key:
+#     file: "./secrets/app_secret_key.txt"
+#   proxy_web_domain_name:
+#     file: "./secrets/web_domain_name.txt"
+#   proxy_app_certificate:
+#     file: "./secrets/proxy_app_certificate/ssl.crt"
+#   proxy_app_certificate_key:
+#     file: "./secrets/proxy_app_certificate/ssl.key"

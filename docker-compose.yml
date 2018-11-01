@@ -1,0 +1,100 @@
+version: "3.6"
+
+services:
+  app:
+    build:
+      context: ./build
+      dockerfile: app/dockerfile
+    image: ${COMPOSE_PROJECT_NAME}_app
+    # secrets:
+    #   - db_database_name
+    #   - db_write_user
+    #   - db_write_pass
+    #   - app_secret_key
+    environment:
+      ENV: "${ENV}"
+      EXEC_TEST: "${EXEC_TEST}"
+      # DB_HOST: db
+      # DB_DATABASE_NAME_FILE: /run/secrets/db_database_name
+      # DB_WRITE_USER_FILE: /run/secrets/db_write_user
+      # DB_WRITE_PASS_FILE: /run/secrets/db_write_pass
+      # APP_SECRET_KEY_FILE: /run/secrets/app_secret_key
+    # depends_on:
+    #   - db
+    # links:
+    #   - db
+    networks:
+      # - proxy_network
+      - dmz_network
+      # - data_network
+
+  # db:
+  #   build:
+  #     context: ./build
+  #     dockerfile: db/dockerfile
+  #   image: ${COMPOSE_PROJECT_NAME}_db
+  #   secrets:
+  #     - db_database_name
+  #     - db_root_pass
+  #     - db_write_user
+  #     - db_write_pass
+  #     #- db_read_user
+  #     #- db_read_pass
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_pass
+  #     DB_DATABASE_NAME_FILE: "/run/secrets/db_database_name"
+  #     DB_WRITE_USER_FILE: /run/secrets/db_write_user
+  #     DB_WRITE_PASS_FILE: /run/secrets/db_write_pass
+  #   networks:
+  #     - data_network
+  #
+  # proxy:
+  #   build:
+  #     context: ./build
+  #     dockerfile: proxy/dockerfile
+  #   image: "${COMPOSE_PROJECT_NAME}_proxy"
+  #   secrets:
+  #     - proxy_web_domain_name
+  #     - proxy_app_certificate
+  #     - proxy_app_certificate_key
+  #   environment:
+  #     ENV: "${ENV}"
+  #     WEB_DOMAIN_NAME_FILE: /run/secrets/proxy_web_domain_name
+  #     PROXY_APP_CERTIFICATE_FILE: /run/secrets/proxy_app_certificate
+  #     PROXY_APP_CERTIFICATE_KEY_FILE: /run/secrets/proxy_app_certificate_key
+  #   depends_on:
+  #     - app
+  #   links:
+  #     - app
+  #   networks:
+  #     - proxy_network
+  #     - dmz_network
+
+networks:
+  dmz_network:
+  # proxy_network:
+  #   internal: true
+  # data_network:
+  #   internal: true
+
+# secrets:
+#   db_database_name:
+#     external: true
+#   db_root_pass:
+#     external: true
+#   db_write_user:
+#     external: true
+#   db_write_pass:
+#     external: true
+#   #db_read_user:
+#   #  external: true
+#   #db_read_pass:
+#   #  external: true
+#   app_secret_key:
+#     external: true
+#   proxy_web_domain_name:
+#     external: true
+#   proxy_app_certificate:
+#     external: true
+#   proxy_app_certificate_key:
+#     external: true

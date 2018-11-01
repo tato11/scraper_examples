@@ -1,0 +1,16 @@
+FROM nginx:1.15-alpine
+MAINTAINER Eduardo Rosales <edutato2008@gmail.com>
+RUN apk add --update --no-cache bash bash-completion gettext
+
+RUN if [ ! -e /opt ]; then mkdir /opt || exit 1; fi; \
+  mkdir /opt/deploy && mkdir /opt/deploy/bin
+COPY ./shared/template_tools.sh /opt/deploy/bin/template_tools.sh
+COPY ./proxy/load_env.sh /opt/deploy/bin/load_env.sh
+COPY ./proxy/start_server.sh /opt/deploy/bin/start_server.sh
+RUN chmod +x \
+  /opt/deploy/bin/template_tools.sh \
+  /opt/deploy/bin/load_env.sh \
+  /opt/deploy/bin/start_server.sh
+
+ENTRYPOINT ["/opt/deploy/bin/load_env.sh"]
+CMD ["/opt/deploy/bin/start_server.sh"]
